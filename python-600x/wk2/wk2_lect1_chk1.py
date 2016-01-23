@@ -8,15 +8,17 @@ resp = ""
 proper_resps = ['h', 'l', 'c']
 
 while resp != 'c':
+    print
     print 'Is your secret number ' + str(guess) + "?"
     print
 
     resp = raw_input(guess_msg)
-    if resp not in proper_resps:
+    print
+    while resp not in proper_resps:
         print "Please respond with only 'h', 'l' or 'c'"
         print 'Try again'
+        print
         resp = raw_input(guess_msg)
-        print 
 
     if resp == 'h':
         high = guess
