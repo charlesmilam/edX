@@ -1,5 +1,5 @@
 # number guessing game
-secret = int(raw_input('Please think of a number between 0 and 100! '))
+
 low = 0
 high = 100
 guess = (low + high) / 2
@@ -8,6 +8,7 @@ error_msg = "Please respond with only 'h', 'l' or 'c' \nTry again"
 resp = ""
 proper_resps = ['h', 'l', 'c']
 
+print 'Please think of a number between 0 and 100!'
 while resp != 'c':
     print
     print 'Is your secret number ' + str(guess) + "?"
