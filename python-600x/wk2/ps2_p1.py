@@ -9,5 +9,5 @@ for month in range(1, 13):
     balance = monthly_upaid_bal + (monthly_interest_rate * monthly_upaid_bal)
 
     print 'Month: ' + str(month)
-    print 'Minimum monthly payment: ' + str(min_payment)
-    print 'Remaining balance: ' + str(balance)
+    print 'Minimum monthly payment: ' + str(round(min_payment, 2))
+    print 'Remaining balance: ' + str(round(balance, 2))
