@@ -20,6 +20,5 @@ while True:
         break
     elif test_fixed_pay(fixed_pay, balance) > diff:
         lower_bound = fixed_pay
-
-    elif test_fixed_pay(fixed_pay, balance) < diff:
+    else:
         upper_bound = fixed_pay
