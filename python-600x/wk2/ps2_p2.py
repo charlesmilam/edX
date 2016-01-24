@@ -1,5 +1,5 @@
-balance = 9900
-annualInterestRate = 0.12
+balance = 320000
+annualInterestRate = 0.2
 monthly_interest_rate = annualInterestRate / 12.0
 fixed_pay = 10
 
