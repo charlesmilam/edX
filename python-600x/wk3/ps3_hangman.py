@@ -149,6 +149,7 @@ def hangman(secretWord):
     # I am thinking of a word that is 4 letters long.
     num_guesses = 8
     letters_guessed = []
+    guess = ''
     div = '-------------'
     print 'Welcome to the game, Hangman!'
     print 'I am thinking of a word that is ' + str(len(secretWord)) + ' letters long.'
@@ -163,6 +164,8 @@ def hangman(secretWord):
     while num_guesses > 0:
         print 'You have ' + str(num_guesses) + ' guesses left.'
         print 'Available letters: ' + getAvailableLetters(letters_guessed)
+        guess = raw_input('Please guess a letter: ').lower()
+        letters_guessed.append(guess)
         print div
         num_guesses -= 1
 
