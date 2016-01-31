@@ -36,7 +36,7 @@
 # Good guess: ta_ t
 # ------------
 # Congratulations, you won!
-# Sorry, you ran out of guesses. The word was else. 
+# Sorry, you ran out of guesses. The word was else.
 
 import random
 import string
@@ -82,8 +82,11 @@ def isWordGuessed(secretWord, lettersGuessed):
     returns: boolean, True if all the letters of secretWord are in lettersGuessed;
       False otherwise
     '''
-    # FILL IN YOUR CODE HERE...
+    for char in secretWord:
+        if char not in lettersGuessed:
+            return False
 
+    return True
 
 
 def getGuessedWord(secretWord, lettersGuessed):
