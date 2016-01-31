@@ -150,6 +150,8 @@ def hangman(secretWord):
     num_guesses = 8
     letters_guessed = []
     guess = ''
+    curr_word_guess = ''
+    prev_word_guess = ''
     div = '-------------'
     print 'Welcome to the game, Hangman!'
     print 'I am thinking of a word that is ' + str(len(secretWord)) + ' letters long.'
@@ -166,7 +168,24 @@ def hangman(secretWord):
         print 'Available letters: ' + getAvailableLetters(letters_guessed)
 
         guess = raw_input('Please guess a letter: ').lower()
-        letters_guessed.append(guess)
+        # letters_guessed.append(guess)
+
+        # You have 8 guesses left.
+        # Available letters: abcdefghijklmnopqrstuvwxyz
+        # Please guess a letter: a
+        # Good guess: _ a_ _
+        # ------------
+        # You have 8 guesses left.
+        # Available letters: bcdefghijklmnopqrstuvwxyz
+        # Please guess a letter: a
+        # Oops! You've already guessed that letter: _ a_ _
+        # ------------
+        # You have 8 guesses left.
+        # Available letters: bcdefghijklmnopqrstuvwxyz
+        # Please guess a letter: s
+        # Oops! That letter is not in my word: _ a_ _
+        # ------------
+
 
         if isWordGuessed(secretWord, letters_guessed):
             print div
@@ -178,7 +197,25 @@ def hangman(secretWord):
             print 'Sorry, you ran out of guesses. The word was ' + secretWord
             break
         else:
-            num_guesses -= 1
+            if guess in letters_guessed:
+                print "Oops! You've already guessed that letter: " + getGuessedWord(secretWord, letters_guessed)
+                letters_guessed.append(guess)
+            else:
+                letters_guessed.append(guess)
+                curr_word_guess = getGuessedWord(secretWord, letters_guessed)
+                if prev_word_guess == curr_word_guess:
+                    print 'Oops! That letter is not in my word: ' + curr_word_guess
+                    num_guesses -= 1
+                    prev_word_guess = curr_word_guess
+                else:
+                    print 'Good guess: ' + curr_word_guess
+                    prev_word_guess = curr_word_guess
+                    if isWordGuessed(secretWord, letters_guessed):
+                        print div
+                        print 'Congratulations, you won!'
+                        break
+
+        print div
 
 
 
