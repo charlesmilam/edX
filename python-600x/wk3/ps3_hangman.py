@@ -114,7 +114,15 @@ def getAvailableLetters(lettersGuessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE...
+    avail_letters = []
+    for char in string.ascii_lowercase:
+        avail_letters.append(char)
+
+    for char in lettersGuessed:
+        if char in avail_letters:
+            avail_letters.remove(char)
+
+    return ''.join(avail_letters)
 
 
 def hangman(secretWord):
@@ -137,7 +145,13 @@ def hangman(secretWord):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE...
+    # Welcome to the game, Hangman!
+    # I am thinking of a word that is 4 letters long.
+    div = '-------------'
+    print 'Welcome to the game, Hangman!'
+    print 'I am thinking of a word that is ' + str(len(secretWord)) + ' letters long.'
+    print 'secret word', secretWord
+    print div
 
 
 
@@ -148,5 +162,5 @@ def hangman(secretWord):
 # and run this file to test! (hint: you might want to pick your own
 # secretWord while you're testing)
 
-# secretWord = chooseWord(wordlist).lower()
-# hangman(secretWord)
+secretWord = chooseWord(wordlist).lower()
+hangman(secretWord)
