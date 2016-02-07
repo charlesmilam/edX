@@ -283,7 +283,8 @@ def playGame(wordList):
     2) When done playing the hand, repeat from step 1
     """
     # TO DO ... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this line when you code the function
+    # print "playGame not yet implemented." # <-- Remove this line when you code the function
+    playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7)
 
 
 
