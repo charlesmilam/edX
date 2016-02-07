@@ -239,18 +239,18 @@ def playHand(hand, wordList, n):
     # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
     total_score = 0
-    
+
     # As long as there are still letters left in the hand:
-    if len(hand):
+    while len(hand):
         # Display the hand
         print 'Current hand: ',
         displayHand(hand)
         # Ask user for input
-
+        input = raw_input('Enter word, or a "." to indicate that you are finished: ')
         # If the input is a single period:
-
+        if input == '.':
             # End the game (break out of the loop)
-
+            break
 
         # Otherwise (the input is not a single period):
 
@@ -266,7 +266,7 @@ def playHand(hand, wordList, n):
 
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-
+    print 'Goodbye! Total score: ' + str(total_score) + ' points.'
 
 #
 # Problem #5: Playing a game
