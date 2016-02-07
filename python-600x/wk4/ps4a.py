@@ -182,7 +182,9 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    sorted_word = list(word)
+    sorted_word.sort()
+    print sorted_word
 
 
 #
