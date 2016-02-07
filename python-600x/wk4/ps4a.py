@@ -182,7 +182,6 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    word_in_hand = False
     working_hand = hand.copy()
 
     for char in word:
@@ -196,22 +195,6 @@ def isValidWord(word, hand, wordList):
 
     return word in wordList
 
-    # sorted_hand_string = []
-    # sorted_word = list(word)
-    # sorted_word.sort()
-    # sorted_word = ''.join(sorted_word)
-    # print sorted_word
-    # for letter in hand.keys():
-    #     for j in range(hand[letter]):
-    #          sorted_hand_string.append(letter)
-    #
-    # sorted_hand_string.sort()
-    # sorted_hand_string = ''.join(sorted_hand_string)
-    # print sorted_hand_string
-    # if (sorted_word in sorted_hand_string) and word in wordList:
-    #     return True
-    # else:
-    #     return False
 
 #
 # Problem #4: Playing a hand
