@@ -238,11 +238,13 @@ def playHand(hand, wordList, n):
     """
     # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
-
+    total_score = 0
+    
     # As long as there are still letters left in the hand:
-
+    if len(hand):
         # Display the hand
-
+        print 'Current hand: ',
+        displayHand(hand)
         # Ask user for input
 
         # If the input is a single period:
@@ -284,7 +286,7 @@ def playGame(wordList):
     """
     # TO DO ... <-- Remove this comment when you code this function
     # print "playGame not yet implemented." # <-- Remove this line when you code the function
-    playHand({'h':1, 'i':1, 'c':1, 'z':1, 'm':2, 'a':1}, wordList, 7)
+    playHand(dealHand(HAND_SIZE), wordList, 7)
 
 
 
