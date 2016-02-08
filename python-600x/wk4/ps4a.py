@@ -272,6 +272,7 @@ def playHand(hand, wordList, n):
                 print
                 # Update the hand
                 hand = updateHand(hand, word)
+                # Eliminate keys whose value is 0
                 for char in word:
                     if hand[char] == 0:
                         del hand[char]
@@ -300,8 +301,21 @@ def playGame(wordList):
     """
     # TO DO ... <-- Remove this comment when you code this function
     # print "playGame not yet implemented." # <-- Remove this line when you code the function
-    playHand({'a': 1, 'r': 1, 'b': 1, 'o': 1}, wordList, 4)
+    # playHand({'a': 1, 'r': 1, 'b': 1, 'o': 1}, wordList, 4)
+    hand = {}
+    choice = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
 
+    if choice == 'n':
+        'chose new'
+    elif choice == 'r':
+        if len(hand):
+            'replay hand'
+        else:
+            print 'You have not played a hand yet. Please play a new hand first!'
+    elif choice == 'e':
+        'end the game'
+    else:
+        'bad choice'
 
 
 
