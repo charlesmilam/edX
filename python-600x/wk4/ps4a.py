@@ -163,8 +163,8 @@ def updateHand(hand, word):
     for char in word:
         if char in hand.keys():
             working_hand[char] -= 1
-            if working_hand[char] == 0:
-                del working_hand[char]
+            # if working_hand[char] == 0:
+            #     del working_hand[char]
 
     return working_hand
 
@@ -242,7 +242,7 @@ def playHand(hand, wordList, n):
     total_score = 0
 
     # As long as there are still letters left in the hand:
-    while len(hand):
+    while len(hand) > 0:
         # Display the hand
         print 'Current hand: ',
         displayHand(hand)
@@ -264,7 +264,7 @@ def playHand(hand, wordList, n):
             else:
                 # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
                 # "fast" earned 28 points. Total: 46 points
-                word_score = getWordScore(word, HAND_SIZE)
+                word_score = getWordScore(word, n)
                 total_score += word_score
                 print '"' + word + '"',
                 print 'earned ' + str(word_score),
@@ -272,9 +272,12 @@ def playHand(hand, wordList, n):
                 print
                 # Update the hand
                 hand = updateHand(hand, word)
+                for char in word:
+                    if hand[char] == 0:
+                        del hand[char]
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-    if len(hand):
+    if len(hand) > 0:
         print 'Goodbye! Total score: ' + str(total_score) + ' points.'
     else:
         print 'Run out of letters. Total score: ' + str(total_score) + ' points.'
@@ -297,7 +300,7 @@ def playGame(wordList):
     """
     # TO DO ... <-- Remove this comment when you code this function
     # print "playGame not yet implemented." # <-- Remove this line when you code the function
-    playHand({'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}, wordList, 7)
+    playHand({'a': 1, 'r': 1, 'b': 1, 'o': 1}, wordList, 4)
 
 
 
