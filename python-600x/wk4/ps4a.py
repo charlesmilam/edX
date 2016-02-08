@@ -306,12 +306,14 @@ def playGame(wordList):
     choice = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
 
     if choice == 'n':
-        'chose new'
+        hand = dealHand(HAND_SIZE)
+        playHand(hand, wordList, HAND_SIZE)
     elif choice == 'r':
         if len(hand):
             'replay hand'
         else:
             print 'You have not played a hand yet. Please play a new hand first!'
+            print
     elif choice == 'e':
         'end the game'
     else:
