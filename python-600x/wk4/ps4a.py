@@ -236,12 +236,11 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
 
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
     total_score = 0
 
     # As long as there are still letters left in the hand:
-    while len(hand):
+    while len(hand) > 0:
         # Display the hand
         print 'Current hand: ',
         displayHand(hand)
@@ -268,11 +267,15 @@ def playHand(hand, wordList, n):
                 print '"' + word + '" ',
                 print ' earned ' + str(word_score),
                 print 'points. Total: ' + str(total_score) + ' points'
+                print
                 # Update the hand
                 hand = updateHand(hand, word)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-    print 'Goodbye! Total score: ' + str(total_score) + ' points.'
+    if len(hand) > 0:
+        print 'Goodbye! Total score: ' + str(total_score) + ' points.'
+    else:
+        print 'Run out of letters. Total score: ' + str(total_score) + ' points.'
 
 #
 # Problem #5: Playing a game
@@ -292,7 +295,7 @@ def playGame(wordList):
     """
     # TO DO ... <-- Remove this comment when you code this function
     # print "playGame not yet implemented." # <-- Remove this line when you code the function
-    playHand(dealHand(HAND_SIZE), wordList, 7)
+    playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
 
 
 
