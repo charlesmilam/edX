@@ -163,6 +163,8 @@ def updateHand(hand, word):
     for char in word:
         if char in hand.keys():
             working_hand[char] -= 1
+            if working_hand[char] == 0:
+                del working_hand[char]
 
     return working_hand
 
@@ -240,7 +242,7 @@ def playHand(hand, wordList, n):
     total_score = 0
 
     # As long as there are still letters left in the hand:
-    while len(hand) > 0:
+    while len(hand):
         # Display the hand
         print 'Current hand: ',
         displayHand(hand)
@@ -264,15 +266,15 @@ def playHand(hand, wordList, n):
                 # "fast" earned 28 points. Total: 46 points
                 word_score = getWordScore(word, HAND_SIZE)
                 total_score += word_score
-                print '"' + word + '" ',
-                print ' earned ' + str(word_score),
+                print '"' + word + '"',
+                print 'earned ' + str(word_score),
                 print 'points. Total: ' + str(total_score) + ' points'
                 print
                 # Update the hand
                 hand = updateHand(hand, word)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-    if len(hand) > 0:
+    if len(hand):
         print 'Goodbye! Total score: ' + str(total_score) + ' points.'
     else:
         print 'Run out of letters. Total score: ' + str(total_score) + ' points.'
@@ -295,7 +297,7 @@ def playGame(wordList):
     """
     # TO DO ... <-- Remove this comment when you code this function
     # print "playGame not yet implemented." # <-- Remove this line when you code the function
-    playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, 7)
+    playHand({'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}, wordList, 7)
 
 
 
