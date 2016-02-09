@@ -275,7 +275,7 @@ def playHand(hand, wordList, n):
                 # Eliminate keys whose value is 0
                 for char in word:
                     try:
-                        if hand[char] == 0:
+                        if hand[char] <= 0:
                             del hand[char]
                     except KeyError:
                         continue
