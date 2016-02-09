@@ -274,8 +274,11 @@ def playHand(hand, wordList, n):
                 hand = updateHand(hand, word)
                 # Eliminate keys whose value is 0
                 for char in word:
-                    if hand[char] == 0:
-                        del hand[char]
+                    try:
+                        if hand[char] == 0:
+                            del hand[char]
+                    except KeyError:
+                        continue
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
     if len(hand) > 0:
@@ -303,21 +306,22 @@ def playGame(wordList):
     # print "playGame not yet implemented." # <-- Remove this line when you code the function
     # playHand({'a': 1, 'r': 1, 'b': 1, 'o': 1}, wordList, 4)
     hand = {}
-    choice = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+    while True:
+        choice = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
 
-    if choice == 'n':
-        hand = dealHand(HAND_SIZE)
-        playHand(hand, wordList, HAND_SIZE)
-    elif choice == 'r':
-        if len(hand):
-            'replay hand'
+        if choice == 'n':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+        elif choice == 'r':
+            if len(hand):
+                playHand(hand, wordList, HAND_SIZE)
+            else:
+                print 'You have not played a hand yet. Please play a new hand first!'
+                print
+        elif choice == 'e':
+            break
         else:
-            print 'You have not played a hand yet. Please play a new hand first!'
-            print
-    elif choice == 'e':
-        'end the game'
-    else:
-        'bad choice'
+            print 'Invalid command.'
 
 
 
