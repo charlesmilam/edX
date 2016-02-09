@@ -66,8 +66,47 @@ def compPlayHand(hand, wordList, n):
     wordList: list (string)
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    # Keep track of the total score
+    total_score = 0
+    while len(hand) > 0:
+        # Display the hand
+        print 'Current hand: ',
+        displayHand(hand)
+        # Ask user for input
+        word = compChooseWord(hand, wordList, n)
+        # If the input is a single period:
+        if word == None:
+            # End the game (break out of the loop)
+            break
 
+        # Otherwise (the input is not a single period):
+        else:
+            # If the word is not valid:
+            if not isValidWord(word, hand, wordList):
+                # Reject invalid word (print a message followed by a blank line)
+                print 'Invalid word, please try again.'
+                print
+            # Otherwise (the word is valid):
+            else:
+                # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
+                # "fast" earned 28 points. Total: 46 points
+                word_score = getWordScore(word, n)
+                total_score += word_score
+                print '"' + word + '"',
+                print 'earned ' + str(word_score),
+                print 'points. Total: ' + str(total_score) + ' points'
+                print
+                # Update the hand
+                hand = updateHand(hand, word)
+                # Eliminate keys whose value is 0
+                for char in word:
+                    try:
+                        if hand[char] <= 0:
+                            del hand[char]
+                    except KeyError:
+                        continue
+
+    print 'Total score: ' + str(total_score) + ' points.'
 #
 # Problem #8: Playing a game
 #
