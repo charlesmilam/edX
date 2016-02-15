@@ -1,14 +1,19 @@
-def dotProduct(listA, listB):
+def isPalindrome(aString):
     '''
-    listA: a list of numbers
-    listB: a list of numbers of the same length as listA
+    aString: a string
     '''
-    total = 0
+    aString = aString.lower()
+    rev_str = ''
 
-    for idx in range(len(listA)):
-        print listA[idx], listB[idx]
-        total += listA[idx] * listB[idx]
+    for char in aString:
+        rev_str = char + rev_str
 
-    return total
+    # print 'strs', aString, rev_str
 
-print str(dotProduct([-90, 74, 39, 89, -24, -71, 44, -98], [15, 61, 33, -45, 47, 0, -9, -58]))
+    return aString == rev_str
+
+print 'Should return False: ' + str(isPalindrome(''))
+print 'Shoule return False: ' + str(isPalindrome('a'))
+print 'Shoule return False: ' + str(isPalindrome('ab'))
+print 'Shoule return True: ' + str(isPalindrome('aba'))
+print 'Shoule return True: ' + str(isPalindrome('Able was I ere I saw Elba'))
