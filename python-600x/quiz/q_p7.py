@@ -32,11 +32,11 @@ def dict_interdiff(d1, d2):
         if key in d2.keys():
             inter_keys[idx] = key
 
-    print 'inter keys', inter_keys
+    # print 'inter keys', inter_keys
     for el in inter_keys:
         inter_ans[inter_keys[el]] = f(d1[inter_keys[el]], d2[inter_keys[el]])
 
-    print 'inter ans', inter_ans
+    # print 'inter ans', inter_ans
 
     for key in d1.keys():
         if key not in d2.keys():
@@ -46,7 +46,7 @@ def dict_interdiff(d1, d2):
         if key not in d1.keys():
             inter_diff[key] = d2[key]
 
-    print 'inter diff', inter_diff
+    # print 'inter diff', inter_diff
 
     return (inter_ans, inter_diff)
 
