@@ -31,7 +31,14 @@ class intSet(object):
         return '{' + ','.join([str(e) for e in self.vals]) + '}'
 
     def intersect(self, other):
-        pass
+        # Initialize a new intSet
+        commonValueSet = intSet()
+        # Go through the values in this set
+        for val in self.vals:
+            # Check if each value is a member of the other set
+            if other.member(val):
+                commonValueSet.insert(val)
+        return commonValueSet
 
     def __len__(self):
         return len(self.vals)
