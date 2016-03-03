@@ -197,7 +197,7 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        pass #delete this line and replace with your code here
+        self.shift = shift
 
 
 class CiphertextMessage(Message):
@@ -263,6 +263,15 @@ print
 plaintext = PlaintextMessage('amyz', 2)
 print 'should print bnza:', plaintext.apply_shift(1)
 print 'should print eqcd:', plaintext.apply_shift(4)
+print
+print '-' * 15
+print
+
+# Test case (PlaintextMessage) - should return the correct encrypted message after change_shift has been called
+plaintext = PlaintextMessage('amyz', 1)
+print 'should print bnza:', plaintext.get_message_text_encrypted()
+plaintext.change_shift(4)
+print 'should print eqcd:', plaintext.get_message_text_encrypted()
 print
 print '-' * 15
 print
