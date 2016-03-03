@@ -239,7 +239,12 @@ print
 # Test case (PlaintextMessage) - should return the encrypted dictionary
 plaintext = PlaintextMessage('test', 2)
 print 'encrypting dictionary: '
-print plaintext.get_encrypting_dict()
+enc_dict =  plaintext.get_encrypting_dict()
+print enc_dict
+print 'should get c:', enc_dict['a']
+print 'should get z:', enc_dict['x']
+print 'should get a:', enc_dict['y']
+print 'should get b:', enc_dict['z']
 print
 print '-' * 15
 print
