@@ -105,13 +105,23 @@ class Message(object):
         # assert 0 <= shift < 26, 'shift is not in the proper range (0 -26): %r' % shift
         encrypt_dict = {}
         lowercase = string.ascii_lowercase
+        uppercase = string.ascii_uppercase
 
+        # add lowercase characters
         for idx, char in enumerate(lowercase):
             # once beyond the end of the alphabet loop back around from the beginning, offset by the value of shift
             if idx + shift <= 25:
                 encrypt_dict[char] = lowercase[idx + shift]
             else:
                 encrypt_dict[char] = lowercase[(idx + shift) - 26]
+
+        # add uppercase characters
+        for idx, char in enumerate(uppercase):
+            # once beyond the end of the alphabet loop back around from the beginning, offset by the value of shift
+            if idx + shift <= 25:
+                encrypt_dict[char] = uppercase[idx + shift]
+            else:
+                encrypt_dict[char] = uppercase[(idx + shift) - 26]
 
         return encrypt_dict
 
@@ -255,6 +265,10 @@ print 'should get c:', enc_dict['a']
 print 'should get z:', enc_dict['x']
 print 'should get a:', enc_dict['y']
 print 'should get b:', enc_dict['z']
+print 'should get C:', enc_dict['A']
+print 'should get Z:', enc_dict['X']
+print 'should get A:', enc_dict['Y']
+print 'should get B:', enc_dict['Z']
 print
 print '-' * 15
 print
