@@ -102,8 +102,9 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to
                  another letter (string).
         '''
-        for char in strin.ascii_lowercase:
-            print char
+        # assert 0 <= shift < 26, 'shift is not in the proper range (0 -26): %r' % shift
+        for char in string.ascii_lowercase:
+            print char,
 
     def apply_shift(self, shift):
         '''
@@ -156,7 +157,7 @@ class PlaintextMessage(Message):
 
         Returns: a COPY of self.encrypting_dict
         '''
-        pass #delete this line and replace with your code here
+        self.build_shift_dict(self.shift)
 
     def get_message_text_encrypted(self):
         '''
@@ -211,12 +212,33 @@ class CiphertextMessage(Message):
         '''
         pass #delete this line and replace with your code here
 
+# Test case (PlaintextMessage) - shift is in the proper range
+# plaintext = PlaintextMessage('test', 27)
+# plaintext.get_encrypting_dict()
+# print 'Should assert that shift is out of range'
+# print
+# print '-' * 15
+# print
+
+# Test case (PlaintextMessage) - get_shift returns correctly
+plaintext = PlaintextMessage('test', 3)
+print 'Should return 3 => ', str(plaintext.get_shift())
+print
+print '-' * 15
+print
+
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
 print 'Expected Output: jgnnq'
 print 'Actual Output:', plaintext.get_message_text_encrypted()
+print
+print '-' * 15
+print
 
 #Example test case (CiphertextMessage)
 ciphertext = CiphertextMessage('jgnnq')
 print 'Expected Output:', (24, 'hello')
 print 'Actual Output:', ciphertext.decrypt_message()
+print
+print '-' * 15
+print
