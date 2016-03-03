@@ -103,7 +103,7 @@ class Message(object):
                  another letter (string).
         '''
         # assert 0 <= shift < 26, 'shift is not in the proper range (0 -26): %r' % shift
-        encrypt_dict = {}
+        self.encrypting_dict = {}
         lowercase = string.ascii_lowercase
         uppercase = string.ascii_uppercase
 
@@ -111,19 +111,19 @@ class Message(object):
         for idx, char in enumerate(lowercase):
             # once beyond the end of the alphabet loop back around from the beginning, offset by the value of shift
             if idx + shift <= 25:
-                encrypt_dict[char] = lowercase[idx + shift]
+                self.encrypting_dict[char] = lowercase[idx + shift]
             else:
-                encrypt_dict[char] = lowercase[(idx + shift) - 26]
+                self.encrypting_dict[char] = lowercase[(idx + shift) - 26]
 
         # add uppercase characters
         for idx, char in enumerate(uppercase):
             # once beyond the end of the alphabet loop back around from the beginning, offset by the value of shift
             if idx + shift <= 25:
-                encrypt_dict[char] = uppercase[idx + shift]
+                self.encrypting_dict[char] = uppercase[idx + shift]
             else:
-                encrypt_dict[char] = uppercase[(idx + shift) - 26]
+                self.encrypting_dict[char] = uppercase[(idx + shift) - 26]
 
-        return encrypt_dict
+        return self.encrypting_dict
 
     def apply_shift(self, shift):
         '''
@@ -186,7 +186,8 @@ class PlaintextMessage(Message):
 
         Returns: a COPY of self.encrypting_dict
         '''
-        return self.build_shift_dict(self.shift)
+        self.encrypting_dict = self.build_shift_dict(self.shift)
+        return self.encrypting_dict.copy()
 
     def get_message_text_encrypted(self):
         '''
