@@ -138,6 +138,9 @@ class PlaintextMessage(Message):
         code is repeated
         '''
         Message.__init__(self, text)
+        self.shift = shift
+        print 'pt text', self.message_text
+        print 'pt shift', self.shift
 
     def get_shift(self):
         '''
