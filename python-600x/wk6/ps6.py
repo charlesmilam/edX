@@ -223,8 +223,8 @@ class CiphertextMessage(Message):
             self.valid_words (list, determined using helper function load_words)
         '''
         Message.__init__(self, text)
-        self.message_text = text
-        self.valid_words = load_words(WORDLIST_FILENAME)
+        # self.message_text = text
+        # self.valid_words = load_words(WORDLIST_FILENAME)
 
     def decrypt_message(self):
         '''
@@ -242,7 +242,14 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        shift_vals = range(0, 26)
+        best_shift = None
+        denc_msg = ''
+
+        for val in shift_vals:
+            print self.apply_shift(val)
+
+
 
 # Test case (PlaintextMessage) - shift is in the proper range
 # plaintext = PlaintextMessage('test', 27)
