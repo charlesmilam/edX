@@ -103,8 +103,17 @@ class Message(object):
                  another letter (string).
         '''
         # assert 0 <= shift < 26, 'shift is not in the proper range (0 -26): %r' % shift
-        for char in string.ascii_lowercase:
-            print char,
+        encrypt_dict = {}
+        lowercase = string.ascii_lowercase
+        # print string.ascii_lowercase[3], len(lowercase)
+        for idx, char in enumerate(lowercase):
+            # once beyond the end of the alphabet loop back around from the beginning, offset by the value of shift
+            if idx + shift <= 25:
+                encrypt_dict[char] = lowercase[idx + shift]
+            else:
+                encrypt_dict[char] = lowercase[(idx + shift) - 26]
+
+        return encrypt_dict
 
     def apply_shift(self, shift):
         '''
@@ -140,8 +149,8 @@ class PlaintextMessage(Message):
         '''
         Message.__init__(self, text)
         self.shift = shift
-        print 'pt text', self.message_text
-        print 'pt shift', self.shift
+        # print 'pt text', self.message_text
+        # print 'pt shift', self.shift
 
     def get_shift(self):
         '''
@@ -157,7 +166,7 @@ class PlaintextMessage(Message):
 
         Returns: a COPY of self.encrypting_dict
         '''
-        self.build_shift_dict(self.shift)
+        return self.build_shift_dict(self.shift)
 
     def get_message_text_encrypted(self):
         '''
@@ -223,6 +232,14 @@ class CiphertextMessage(Message):
 # Test case (PlaintextMessage) - get_shift returns correctly
 plaintext = PlaintextMessage('test', 3)
 print 'Should return 3 => ', str(plaintext.get_shift())
+print
+print '-' * 15
+print
+
+# Test case (PlaintextMessage) - should return the encrypted dictionary
+plaintext = PlaintextMessage('test', 2)
+print 'encrypting dictionary: '
+print plaintext.get_encrypting_dict()
 print
 print '-' * 15
 print
