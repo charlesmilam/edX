@@ -246,15 +246,23 @@ class CiphertextMessage(Message):
         test_msg = self.message_text.split(' ')
         denc_msg = ''
 
-        print 'test msg', test_msg
-
+        # print 'test msg', test_msg
         for val in shift_vals:
-            test_word = self.apply_shift(val)
-            if test_word in self.valid_words:
-                best_shift = val
-                denc_msg = test_word
+            for word in test_msg:
+                self.message_text = word
+                test_word = self.apply_shift(val)
+                if test_word in self.valid_words:
+                    word_count += 1
+                    denc_msg += test_word + ' '
 
-        return (best_shift, denc_msg)
+        if word_count > best_shift:
+            best_shift = val - 1
+            word_count = 0
+        else:
+            word_count = 0
+            denc_msg = ''
+
+        return (best_shift, string.rstrip(denc_msg))
 
 
 
