@@ -184,7 +184,7 @@ class PlaintextMessage(Message):
 
         Returns: self.message_text_encrypted
         '''
-        pass #delete this line and replace with your code here
+        return self.apply_shift(self.shift)
 
     def change_shift(self, shift):
         '''
