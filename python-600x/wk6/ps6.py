@@ -105,7 +105,7 @@ class Message(object):
         # assert 0 <= shift < 26, 'shift is not in the proper range (0 -26): %r' % shift
         encrypt_dict = {}
         lowercase = string.ascii_lowercase
-        # print string.ascii_lowercase[3], len(lowercase)
+
         for idx, char in enumerate(lowercase):
             # once beyond the end of the alphabet loop back around from the beginning, offset by the value of shift
             if idx + shift <= 25:
@@ -127,7 +127,17 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        enc_msg = ''
+        enc_dict = self.build_shift_dict(shift)
+        # print 'pt msg', self.message_text
+        for char in self.message_text:
+            if char in string.ascii_lowercase:
+                enc_msg += enc_dict[char]
+            else:
+                enc_msg += char
+
+        return enc_msg
+
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -245,6 +255,14 @@ print 'should get c:', enc_dict['a']
 print 'should get z:', enc_dict['x']
 print 'should get a:', enc_dict['y']
 print 'should get b:', enc_dict['z']
+print
+print '-' * 15
+print
+
+# Test case (PlaintextMessage) - should return the encrypted message
+plaintext = PlaintextMessage('amyz', 2)
+print 'should print bnza:', plaintext.apply_shift(1)
+print 'should print eqcd:', plaintext.apply_shift(4)
 print
 print '-' * 15
 print
