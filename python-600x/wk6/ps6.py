@@ -246,25 +246,34 @@ class CiphertextMessage(Message):
         word_count = 0
         test_msg = self.message_text.split(' ')
         denc_msg = ''
-
+        best_msg = ''
+        # print 'test msg:', test_msg
         # print 'test msg', test_msg
         for val in shift_vals:
+            # print 'val:', val
             for word in test_msg:
+                # print 'word:', word
                 self.message_text = word
-                test_word = self.apply_shift(val)
+                # print 'message_text:', self.message_text
+                test_word = self.apply_shift(26 - val)
+                # print 'test word:', test_word
                 if is_word(self.valid_words, test_word):
                     word_count += 1
+                    # print 'word count:', word_count
                     denc_msg += test_word + ' '
+                    # print 'denc msg:', denc_msg
+            # print 'word count', word_count, best_count, best_shift, best_msg
+            if word_count > best_count:
+                # print 'in > word count'
+                best_count = word_count
+                best_shift = 26 - val
+                best_msg = denc_msg
+                word_count = 0
 
-        if word_count > best_count:
-            best_count = word_count
-            best_shift = val - 1
-            word_count = 0
-        else:
             word_count = 0
             denc_msg = ''
 
-        return (best_shift, string.rstrip(denc_msg))
+        return (best_shift, string.rstrip(best_msg))
 
 
 
@@ -318,8 +327,8 @@ print '-' * 15
 print
 
 #Example test case (PlaintextMessage)
-plaintext = PlaintextMessage('hello', 2)
-print 'Expected Output: jgnnq'
+plaintext = PlaintextMessage('Nonsense', 2)
+print 'Expected Output: Pqpugpug'
 print 'Actual Output:', plaintext.get_message_text_encrypted()
 print
 print '-' * 15
@@ -344,3 +353,12 @@ print 'Decoded Msg', enc_text.decrypt_message()
 print
 print '-' * 15
 print
+
+def decrypt_story():
+    story_text = get_story_string()
+
+    ciphertext = CiphertextMessage(story_text)
+
+    return ciphertext.decrypt_message()
+
+print 'dec story', decrypt_story()
