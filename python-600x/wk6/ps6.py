@@ -141,7 +141,7 @@ class Message(object):
         enc_dict = self.build_shift_dict(shift)
         # print 'pt msg', self.message_text
         for char in self.message_text:
-            if char in string.ascii_lowercase:
+            if char in string.ascii_lowercase or char in string.ascii_uppercase:
                 enc_msg += enc_dict[char]
             else:
                 enc_msg += char
@@ -242,6 +242,7 @@ class CiphertextMessage(Message):
         '''
         shift_vals = range(0, 26)
         best_shift = None
+        best_count = 0
         word_count = 0
         test_msg = self.message_text.split(' ')
         denc_msg = ''
@@ -251,11 +252,12 @@ class CiphertextMessage(Message):
             for word in test_msg:
                 self.message_text = word
                 test_word = self.apply_shift(val)
-                if test_word in self.valid_words:
+                if is_word(self.valid_words, test_word):
                     word_count += 1
                     denc_msg += test_word + ' '
 
-        if word_count > best_shift:
+        if word_count > best_count:
+            best_count = word_count
             best_shift = val - 1
             word_count = 0
         else:
@@ -327,6 +329,18 @@ print
 ciphertext = CiphertextMessage('jgnnq')
 print 'Expected Output:', (24, 'hello')
 print 'Actual Output:', ciphertext.decrypt_message()
+print
+print '-' * 15
+print
+
+#Example test case (PlaintextMessage)
+plaintext = PlaintextMessage('Message is Nonsense words: cultivate lamp wish amount gradual whichever add throat there unite pronunciation sleep conversation reduction gap', 2)
+encoded_msg = plaintext.get_message_text_encrypted()
+enc_text = CiphertextMessage(encoded_msg)
+print 'Encoded Msg:', encoded_msg
+print
+print 'Plaintext:', 'Message is Nonsense words: cultivate lamp wish amount gradual whichever add throat there unite pronunciation sleep conversation reduction gap'
+print 'Decoded Msg', enc_text.decrypt_message()
 print
 print '-' * 15
 print
