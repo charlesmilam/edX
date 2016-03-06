@@ -26,7 +26,11 @@ class AdoptionCenter:
         return self.adoption_center['name']
 
     def adopt_pet(self, species):
-        pass
+        if species in self.adoption_center['species_types']:
+            self.adoption_center['species_types'][species] -= 1
+            # remove the key if <= 0
+            if self.adoption_center['species_types'] <= 0:
+                self.adoption_center['species_types'].pop(species)
 
 
 class Adopter:
@@ -161,3 +165,9 @@ print 'Actual:', test_center.get_name()
 print
 print '-' * 15
 print
+
+# Test - adopt_pet from an adoption center
+print 'Should correctly decrement the count for a given species'
+print 'Expect Dog to be: 9'
+test_center.adopt_pet('Dog')
+print 'Actual Dog is:', test_center.get_number_of_species('Dog')
