@@ -12,16 +12,21 @@ class AdoptionCenter:
         self.adoption_center['name'] = name
         self.adoption_center['species_types'] = species_types
         self.adoption_center['location'] = location
+
     def get_number_of_species(self, animal):
-        # Your Code Here
+        pass
+
     def get_location(self):
-        # Your Code Here
+        pass
+
     def get_species_count(self):
-        # Your Code Here
+        pass
+
     def get_name(self):
-        # Your Code Here
+        pass
+
     def adopt_pet(self, species):
-        # Your Code Here
+        pass
 
 
 class Adopter:
@@ -31,13 +36,16 @@ class Adopter:
     simply the number of species that the shelter has of that species.
     """
     def __init__(self, name, desired_species):
-        # Your Code Here
+        pass
+
     def get_name(self):
-        # Your Code Here
+        pass
+
     def get_desired_species(self):
-        # Your Code Here
+        pass
+
     def get_score(self, adoption_center):
-        # Your Code Here
+        pass
 
 
 
@@ -48,7 +56,7 @@ class FlexibleAdopter(Adopter):
     considered_species is a list containing the other species the adopter will consider
     Their score should be 1x their desired species + .3x all of their desired species
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    pass # should contain an __init__ and a get_score method.
 
 
 class FearfulAdopter(Adopter):
@@ -58,7 +66,7 @@ class FearfulAdopter(Adopter):
     be a bit more reluctant to go there due to the presence of the feared species.
     Their score should be 1x number of desired species - .3x the number of feared species
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    pass # should contain an __init__ and a get_score method.
 
 
 class AllergicAdopter(Adopter):
@@ -68,7 +76,7 @@ class AllergicAdopter(Adopter):
     these animals, they will not go there.
     Score should be 0 if the center contains any of the animals, or 1x number of desired animals if not
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    pass # should contain an __init__ and a get_score method.
 
 
 class MedicatedAllergicAdopter(AllergicAdopter):
@@ -79,7 +87,7 @@ class MedicatedAllergicAdopter(AllergicAdopter):
     To do this, first examine what species the AdoptionCenter has that the MedicatedAllergicAdopter is allergic to, then compare them to the medicine_effectiveness dictionary.
     Take the lowest medicine_effectiveness found for these species, and multiply that value by the Adopter's calculate score method.
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    pass # should contain an __init__ and a get_score method.
 
 
 class SluggishAdopter(Adopter):
@@ -95,17 +103,25 @@ class SluggishAdopter(Adopter):
     elif distance < 5. return random between (.5, .7 times number of desired species
     else return random between (.1, .5) times number of desired species
     """
-    # Your Code Here, should contain an __init__ and a get_score method.
+    pass # should contain an __init__ and a get_score method.
 
 
 def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     """
     The method returns a list of an organized adoption_center such that the scores for each AdoptionCenter to the Adopter will be ordered from highest score to lowest score.
     """
-    # Your Code Here
+    pass
 
 def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
     The function returns a list of the top n scoring Adopters from list_of_adopters (in numerical order of score)
     """
-    # Your Code Here
+    pass
+
+
+# Test - create an instance of an adoption center
+ac_name = 'Test One'
+ac_species_types = {"Dog": 10, "Cat": 5, "Lizard": 3}
+ac_location = (1.0, 3.0)
+test_center = AdoptionCenter(ac_name, ac_species_types, ac_location)
+print 'Should return an object with correct values:', test_center.adoption_center
