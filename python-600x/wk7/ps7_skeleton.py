@@ -29,7 +29,7 @@ class AdoptionCenter:
         if species in self.adoption_center['species_types']:
             self.adoption_center['species_types'][species] -= 1
             # remove the key if <= 0
-            if self.adoption_center['species_types'] <= 0:
+            if self.adoption_center['species_types'][species] <= 0:
                 self.adoption_center['species_types'].pop(species)
 
 
@@ -171,3 +171,23 @@ print 'Should correctly decrement the count for a given species'
 print 'Expect Dog to be: 9'
 test_center.adopt_pet('Dog')
 print 'Actual Dog is:', test_center.get_number_of_species('Dog')
+print
+print '-' * 15
+print
+
+# Test - adopt_pet from an adoption center
+print 'Should correctly decrement the count for a given species, and remove the key when it reaches 0'
+print 'Expect Lizard to be: 2'
+test_center.adopt_pet('Lizard')
+print 'Actual Lizard is:', test_center.get_number_of_species('Lizard')
+print 'Expect Lizard to be: 1'
+test_center.adopt_pet('Lizard')
+print 'Actual Lizard is:', test_center.get_number_of_species('Lizard')
+test_center.adopt_pet('Lizard')
+print 'Expect Lizard to not be list of species'
+print test_center.get_species_count()
+test_center.adopt_pet('Lizard')
+print 'Should not generate an error when searching for non-existent key'
+print
+print '-' * 15
+print
