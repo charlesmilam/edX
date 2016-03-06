@@ -124,4 +124,8 @@ ac_name = 'Test One'
 ac_species_types = {"Dog": 10, "Cat": 5, "Lizard": 3}
 ac_location = (1.0, 3.0)
 test_center = AdoptionCenter(ac_name, ac_species_types, ac_location)
-print 'Should return an object with correct values:', test_center.adoption_center
+print 'Should return an object with correct values:'
+print test_center.adoption_center
+print
+print '-' * 15
+print
