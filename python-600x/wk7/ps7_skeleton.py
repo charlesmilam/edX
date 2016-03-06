@@ -14,10 +14,10 @@ class AdoptionCenter:
         self.adoption_center['location'] = location
 
     def get_number_of_species(self, animal):
-        pass
+        return self.adoption_center['species_types'][animal]
 
     def get_location(self):
-        pass
+        return self.adoption_center['location']
 
     def get_species_count(self):
         pass
@@ -129,3 +129,16 @@ print test_center.adoption_center
 print
 print '-' * 15
 print
+
+# Test - get_number_of_species for a given animal
+print 'Should return the correct number of animals for a given species'
+print 'Expect: 10'
+print 'Actual:', test_center.get_number_of_species('Dog')
+print
+print '-' * 15
+print
+
+# Test - get_location for an adoption center
+print 'Should return the correct location for an adoption center'
+print 'Expect: (1.0, 3.0)'
+print 'Actual:', test_center.get_location()
