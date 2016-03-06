@@ -23,7 +23,7 @@ class AdoptionCenter:
         return self.adoption_center.copy()
 
     def get_name(self):
-        pass
+        return self.adoption_center['name']
 
     def adopt_pet(self, species):
         pass
@@ -150,6 +150,14 @@ print
 print 'Shoud return a copy of the adoption center object'
 print 'Expect: False'
 print 'Actual:', test_center.get_species_count() is test_center.adoption_center
+print
+print '-' * 15
+print
+
+# Test - get_name for an adoption center
+print 'Should return the correct name for an adoption center'
+print 'Expect: Test One'
+print 'Actual:', test_center.get_name()
 print
 print '-' * 15
 print
