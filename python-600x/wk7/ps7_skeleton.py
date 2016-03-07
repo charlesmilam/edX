@@ -101,7 +101,16 @@ class AllergicAdopter(Adopter):
     these animals, they will not go there.
     Score should be 0 if the center contains any of the animals, or 1x number of desired animals if not
     """
-    pass # should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, allergic_species):
+        Adopter.__init__(self, name, desired_species)
+        self.allergic_species = allergic_species
+
+    def get_score(self, adoption_center):
+        for species in self.allergic_species:
+            if species in adoption_center.get_species_count():
+                return 0.0
+
+        return float(Adopter.get_score(self, adoption_center))
 
 
 class MedicatedAllergicAdopter(AllergicAdopter):
@@ -112,7 +121,19 @@ class MedicatedAllergicAdopter(AllergicAdopter):
     To do this, first examine what species the AdoptionCenter has that the MedicatedAllergicAdopter is allergic to, then compare them to the medicine_effectiveness dictionary.
     Take the lowest medicine_effectiveness found for these species, and multiply that value by the Adopter's calculate score method.
     """
-    pass # should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, allergic_species, medicine_effectiveness):
+        Adopter.__init__(self, name, desired_species)
+        self.allergic_species = allergic_species
+        self.medicine_effectiveness = medicine_effectiveness
+
+    def get_score(self, adoption_center):
+        most_allergic = 1.0
+        for species in self.allergic_species:
+            if species in adoption_center.get_species_count():
+                if self.medicine_effectiveness[species] < most_allergic:
+                    most_allergic = self.medicine_effectiveness[species]
+
+        return float(Adopter.get_score(self, adoption_center) * most_allergic)
 
 
 class SluggishAdopter(Adopter):
@@ -275,7 +296,7 @@ print 'Should return an instance of an adopter:'
 print test_fear_adopter
 print
 print 'Should return the correct adopter name'
-print 'Expect: Chuck'
+print 'Expect: Alli'
 print 'Actual:', test_fear_adopter.get_name()
 print
 print 'Should return the correct desired species'
@@ -285,6 +306,54 @@ print
 print 'Should return the correct score'
 print 'Expect: 8.7'
 print 'Actual:', test_fear_adopter.get_score(test_center)
+print
+print '-' * 15
+print
+
+# Test - create an allergic adopter
+ad_allergic_name = 'Rose'
+ad_allergic_desirespecies = 'Dog'
+ad_allergic_species = ['Rabbit', 'Lizard']
+test_allergic_adopter = AllergicAdopter(ad_allergic_name, ad_allergic_desirespecies, ad_allergic_species)
+print 'Should return an instance of an adopter:'
+print test_allergic_adopter
+print
+print 'Should return the correct adopter name'
+print 'Expect: Rose'
+print 'Actual:', test_allergic_adopter.get_name()
+print
+print 'Should return the correct desired species'
+print 'Expect: Dog'
+print 'Actual:', test_allergic_adopter.get_desired_species()
+print
+print 'Should return the correct score'
+print 'Expect: 0.0'
+print 'Actual:', test_allergic_adopter.get_score(test_center)
+print
+print '-' * 15
+print
+
+{"Dog": 0.5, "Cat": 0.0, "Horse": 1.0}
+# Test - create an medicated allergic adopter
+ad_med_allergic_name = 'Bop'
+ad_med_allergic_desirespecies = 'Dog'
+ad_med_allergic_species = ['Horse', 'Bird']
+ad_medicated_species = {"Bird": 0.5, "Cat": 0.0, "Horse": 1.0}
+test_med_allergic_adopter = MedicatedAllergicAdopter(ad_med_allergic_name, ad_med_allergic_desirespecies, ad_med_allergic_species, ad_medicated_species)
+print 'Should return an instance of an adopter:'
+print test_med_allergic_adopter
+print
+print 'Should return the correct adopter name'
+print 'Expect: Bop'
+print 'Actual:', test_med_allergic_adopter.get_name()
+print
+print 'Should return the correct desired species'
+print 'Expect: Dog'
+print 'Actual:', test_med_allergic_adopter.get_desired_species()
+print
+print 'Should return the correct score'
+print 'Expect: 4.5'
+print 'Actual:', test_med_allergic_adopter.get_score(test_center)
 print
 print '-' * 15
 print
