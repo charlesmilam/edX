@@ -53,7 +53,7 @@ class Adopter:
         return self.desired_species
 
     def get_score(self, adoption_center):
-        return 1 * adoption_center.get_number_of_species(self.desired_species)
+        return float(1 * adoption_center.get_number_of_species(self.desired_species))
 
 
 class FlexibleAdopter(Adopter):
@@ -63,8 +63,16 @@ class FlexibleAdopter(Adopter):
     considered_species is a list containing the other species the adopter will consider
     Their score should be 1x their desired species + .3x all of their desired species
     """
-    pass # should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, considered_species):
+        Adopter.__init__(self, name, desired_species)
+        self.considered_species = considered_species
 
+    def get_score(self, adoption_center):
+        considered_species_count = 0
+        for species in self.considered_species:
+            considered_species_count += adoption_center.get_number_of_species(species)
+
+        return float(Adopter.get_score(self, adoption_center) + (considered_species_count * .3))
 
 class FearfulAdopter(Adopter):
     """
@@ -73,7 +81,17 @@ class FearfulAdopter(Adopter):
     be a bit more reluctant to go there due to the presence of the feared species.
     Their score should be 1x number of desired species - .3x the number of feared species
     """
-    pass # should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, feared_species):
+        Adopter.__init__(self, name, desired_species)
+        self.feared_species = feared_species
+
+    def get_score(self, adoption_center):
+        score = float(Adopter.get_score(self, adoption_center) - (adoption_center.get_number_of_species(self.feared_species) * .3))
+
+        if score < 0:
+            return 0.0
+        else:
+            return score
 
 
 class AllergicAdopter(Adopter):
@@ -128,7 +146,7 @@ def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
 
 # Test - create an instance of an adoption center
 ac_name = 'Test One'
-ac_species_types = {"Dog": 10, "Cat": 5, "Lizard": 3}
+ac_species_types = {"Dog": 10, "Cat": 5, "Lizard": 3, 'Bird': 7, 'Rabbit': 1}
 ac_location = (1.0, 3.0)
 test_center = AdoptionCenter(ac_name, ac_species_types, ac_location)
 print 'Should return an object with correct values:'
@@ -219,8 +237,54 @@ print 'Expect: Dog'
 print 'Actual:', test_adopter.get_desired_species()
 print
 print 'Should return the correct score'
-print 'Expect: 9'
+print 'Expect: 9.0'
 print 'Actual:', test_adopter.get_score(test_center)
+print
+print '-' * 15
+print
+
+# Test - create a flexible adopter
+ad_name = 'Grace'
+ad_species = 'Dog'
+ad_con_species = ['Cat', 'Bird', 'Rabbit']
+test_flex_adopter = FlexibleAdopter(ad_name, ad_species, ad_con_species)
+print 'Should return an instance of an adopter:'
+print test_flex_adopter
+print
+print 'Should return the correct adopter name'
+print 'Expect: Chuck'
+print 'Actual:', test_flex_adopter.get_name()
+print
+print 'Should return the correct desired species'
+print 'Expect: Dog'
+print 'Actual:', test_flex_adopter.get_desired_species()
+print
+print 'Should return the correct score'
+print 'Expect: 12.9'
+print 'Actual:', test_flex_adopter.get_score(test_center)
+print
+print '-' * 15
+print
+
+# Test - create a fearful adopter
+ad_fear_name = 'Alli'
+ad_fear_desirespecies = 'Dog'
+ad_fear_species = 'Rabbit'
+test_fear_adopter = FearfulAdopter(ad_fear_name, ad_fear_desirespecies, ad_fear_species)
+print 'Should return an instance of an adopter:'
+print test_fear_adopter
+print
+print 'Should return the correct adopter name'
+print 'Expect: Chuck'
+print 'Actual:', test_fear_adopter.get_name()
+print
+print 'Should return the correct desired species'
+print 'Expect: Dog'
+print 'Actual:', test_fear_adopter.get_desired_species()
+print
+print 'Should return the correct score'
+print 'Expect: 8.7'
+print 'Actual:', test_fear_adopter.get_score(test_center)
 print
 print '-' * 15
 print
