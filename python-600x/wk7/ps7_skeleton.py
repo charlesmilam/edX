@@ -154,7 +154,7 @@ class SluggishAdopter(Adopter):
         self.location = location
 
     def get_linear_distance(self, to_location):
-        return (self.location[0] - to_location[0])**2 + (self.location[1] - to_location[1])**2 * (self.location[0] - to_location[0])**2 + (self.location[1] - to_location[1])**2
+        return ((self.location[0] - to_location[0])**2 + (self.location[1] - to_location[1])**2)**.5
 
     def get_score(self, adoption_center):
         lin_dist = self.get_linear_distance(adoption_center.get_location())
@@ -167,7 +167,7 @@ class SluggishAdopter(Adopter):
         elif 3 <= lin_dist < 5:
             modifier = rand.uniform(.5, .7)
             return adoption_center.get_number_of_species(self.desired_species) * modifier
-        else:
+        elif lin_dist >= 5:
             modifier = rand.uniform(.1, .5)
             return adoption_center.get_number_of_species(self.desired_species) * modifier
 
@@ -380,9 +380,24 @@ print '-' * 15
 print
 
 # Test - create a sluggish adopter
+# test cases
+# (0, 0) (10.0, 3.0)
+# 1.35516525037
+# (0, 0) (8.0, -5.0)
+# 23.3363694486
+# (0, 0) (2.2, -3.3)
+# 14.6128279803
+# (0, 0) (9.0, 9.0)
+# 3.85860990005
+# (0, 0) (-9.9, -2.0)
+# 0.0
+ac1_name = 'Test Two'
+ac1_species_types = {"Dog": 10, "Cat": 5, "Lizard": 3, 'Bird': 7, 'Rabbit': 1}
+ac1_location = (2.2, -3.3)
+test_center2 = AdoptionCenter(ac1_name, ac1_species_types, ac1_location)
 ad_slug_name = 'Dottie'
 ad_slug_species = 'Dog'
-slug_locn = (3, 3)
+slug_locn = (0, 0)
 test_slug_adopter = SluggishAdopter(ad_name, ad_species, slug_locn)
 print 'Should return an instance of an adopter:'
 print test_slug_adopter
@@ -396,8 +411,8 @@ print 'Expect: Dog'
 print 'Actual:', test_slug_adopter.get_desired_species()
 print
 print 'Should return the correct score'
-print 'Expect: 9.0'
-print 'Actual:', test_slug_adopter.get_score(test_center)
+print 'Expect: 28.0064139901'
+print 'Actual:', test_slug_adopter.get_score(test_center2)
 print
 print '-' * 15
 print
