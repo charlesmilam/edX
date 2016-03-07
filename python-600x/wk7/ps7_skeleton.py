@@ -11,16 +11,19 @@ class AdoptionCenter:
         self.adoption_center = {}
         self.adoption_center['name'] = name
         self.adoption_center['species_types'] = species_types
-        self.adoption_center['location'] = location
+        self.adoption_center['location'] = tuple (map (float, location))
 
     def get_number_of_species(self, animal):
-        return self.adoption_center['species_types'][animal]
+        try:
+            return self.adoption_center['species_types'][animal]
+        except:
+            return 0
 
     def get_location(self):
         return self.adoption_center['location']
 
     def get_species_count(self):
-        return self.adoption_center.copy()
+        return self.adoption_center['species_types'].copy()
 
     def get_name(self):
         return self.adoption_center['name']
@@ -142,6 +145,14 @@ print
 print '-' * 15
 print
 
+# Test - get_number_of_species for a given animal
+print 'Should not error if species not in species_types'
+test_center.get_number_of_species('Bird')
+print 'There should be no error'
+print
+print '-' * 15
+print
+
 # Test - get_location for an adoption center
 print 'Should return the correct location for an adoption center'
 print 'Expect: (1.0, 3.0)'
@@ -153,7 +164,7 @@ print
 # Test - get_species_count for an adoption center
 print 'Shoud return a copy of the adoption center object'
 print 'Expect: False'
-print 'Actual:', test_center.get_species_count() is test_center.adoption_center
+print 'Actual:', test_center.get_species_count() is test_center.adoption_center['species_types']
 print
 print '-' * 15
 print
