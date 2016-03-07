@@ -43,7 +43,8 @@ class Adopter:
     simply the number of species that the shelter has of that species.
     """
     def __init__(self, name, desired_species):
-        pass
+        self.name = name
+        self.desired_species = desired_species
 
     def get_name(self):
         pass
@@ -199,6 +200,16 @@ print 'Expect Lizard to not be list of species'
 print test_center.get_species_count()
 test_center.adopt_pet('Lizard')
 print 'Should not generate an error when searching for non-existent key'
+print
+print '-' * 15
+print
+
+# Test - create an adopter
+ad_name = 'Chuck'
+ad_species = 'Dog'
+test_adopter = Adopter(ad_name, ad_species)
+print 'Should return an instance of an adopter:'
+print test_adopter
 print
 print '-' * 15
 print
