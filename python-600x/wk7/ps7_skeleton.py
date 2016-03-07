@@ -149,7 +149,28 @@ class SluggishAdopter(Adopter):
     elif distance < 5. return random between (.5, .7 times number of desired species
     else return random between (.1, .5) times number of desired species
     """
-    pass # should contain an __init__ and a get_score method.
+    def __init__(self, name, desired_species, location):
+        Adopter.__init__(self, name, desired_species)
+        self.location = location
+
+    def get_linear_distance(self, to_location):
+        return (self.location[0] - to_location[0])**2 + (self.location[1] - to_location[1])**2 * (self.location[0] - to_location[0])**2 + (self.location[1] - to_location[1])**2
+
+    def get_score(self, adoption_center):
+        lin_dist = self.get_linear_distance(adoption_center.get_location())
+
+        if lin_dist < 1:
+            return Adapter.get_score(self.desired_species)
+        elif 1 <= lin_dist < 3:
+            modifier = rand.uniform(.7, .9)
+            return adoption_center.get_number_of_species(self.desired_species) * modifier
+        elif 3 <= lin_dist < 5:
+            modifier = rand.uniform(.5, .7)
+            return adoption_center.get_number_of_species(self.desired_species) * modifier
+        else:
+            modifier = rand.uniform(.1, .5)
+            return adoption_center.get_number_of_species(self.desired_species) * modifier
+
 
 
 def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
@@ -354,6 +375,29 @@ print
 print 'Should return the correct score'
 print 'Expect: 4.5'
 print 'Actual:', test_med_allergic_adopter.get_score(test_center)
+print
+print '-' * 15
+print
+
+# Test - create a sluggish adopter
+ad_slug_name = 'Dottie'
+ad_slug_species = 'Dog'
+slug_locn = (3, 3)
+test_slug_adopter = SluggishAdopter(ad_name, ad_species, slug_locn)
+print 'Should return an instance of an adopter:'
+print test_slug_adopter
+print
+print 'Should return the correct adopter name'
+print 'Expect: Chuck'
+print 'Actual:', test_slug_adopter.get_name()
+print
+print 'Should return the correct desired species'
+print 'Expect: Dog'
+print 'Actual:', test_slug_adopter.get_desired_species()
+print
+print 'Should return the correct score'
+print 'Expect: 9.0'
+print 'Actual:', test_slug_adopter.get_score(test_center)
 print
 print '-' * 15
 print
