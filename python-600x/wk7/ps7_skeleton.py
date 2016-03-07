@@ -47,14 +47,13 @@ class Adopter:
         self.desired_species = desired_species
 
     def get_name(self):
-        pass
+        return self.name
 
     def get_desired_species(self):
-        pass
+        return self.desired_species
 
     def get_score(self, adoption_center):
-        pass
-
+        return 1 * adoption_center.get_number_of_species(self.desired_species)
 
 
 class FlexibleAdopter(Adopter):
@@ -210,6 +209,18 @@ ad_species = 'Dog'
 test_adopter = Adopter(ad_name, ad_species)
 print 'Should return an instance of an adopter:'
 print test_adopter
+print
+print 'Should return the correct adopter name'
+print 'Expect: Chuck'
+print 'Actual:', test_adopter.get_name()
+print
+print 'Should return the correct desired species'
+print 'Expect: Dog'
+print 'Actual:', test_adopter.get_desired_species()
+print
+print 'Should return the correct score'
+print 'Expect: 9'
+print 'Actual:', test_adopter.get_score(test_center)
 print
 print '-' * 15
 print
