@@ -181,20 +181,33 @@ def get_ordered_adoption_center_list(adopter, list_of_adoption_centers):
     for ac in list_of_adoption_centers:
         ac_list.append({'ac': ac, 'score': adopter.get_score(ac)})
 
-    print ac_list
-    sorted_ac_list = sorted(ac_list, key=lambda k: (k['score'], k['ac'].get_name()), reverse=True)
+    # sorted_ac_list = sorted(ac_list, key=lambda k: (k['score'], k['ac'].get_name()))
+    sorted_ac_list = sorted(ac_list, key=lambda k: (k['ac'].get_name()))
+    sorted_ac_list = sorted(ac_list, key=lambda k: (k['score']), reverse=True)
     final_list = []
     for item in sorted_ac_list:
         final_list.append(item['ac'])
-    print sorted_ac_list
-    print final_list
+
+    # final_list = final_list[::-1]
+
     return final_list
 
 def get_adopters_for_advertisement(adoption_center, list_of_adopters, n):
     """
     The function returns a list of the top n scoring Adopters from list_of_adopters (in numerical order of score)
     """
-    pass
+    ad_list = []
+    for ad in list_of_adopters:
+        ad_list.append({'ad': ad, 'score': ad.get_score(adoption_center)})
+
+    sorted_ad_list = sorted(ad_list, key=lambda k: (k['ad'].get_name()))
+    sorted_ad_list = sorted(ad_list, key=lambda k: (k['score']), reverse=True)
+    # sorted_ad_list = sorted(ad_list, key=lambda k: (k['score'], k['ad'].get_name()), reverse=True)
+    final_list = []
+    for item in sorted_ad_list:
+        final_list.append(item['ad'])
+
+    return final_list
 
 
 # Test - create an instance of an adoption center
@@ -456,5 +469,5 @@ ac5 = AdoptionCenter("Place5", {"Cat": 45, "Lizard": 2}, (8,-2))
 ac6 = AdoptionCenter("Place6", {"Cat": 23, "Dog": 7, "Horse": 5}, (-10,10))
 
 # how to test get_ordered_adoption_center_list
-get_ordered_adoption_center_list(adopter4, [ac,ac2,ac3,ac4,ac5,ac6])
+print 'Ordered adoption centers', get_ordered_adoption_center_list(adopter4, [ac,ac2,ac3,ac4,ac5,ac6])
 # you can print the name and score of each item in the list returned
