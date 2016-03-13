@@ -45,7 +45,7 @@ class USResident(Person):
         """
         Person.__init__(self, name)
         legal_vals = ["citizen", "legal_resident", "illegal_resident"]
-        
+
         if status in legal_vals:
             self.status = status
         else:
@@ -61,8 +61,10 @@ class USResident(Person):
 print 'Expected: citizen'
 a = USResident('Tim Beaver', 'citizen')
 print 'Actual:', a.getStatus()
+print
+print '-' * 15
+print
 
 # Test - person is not an US resident
 print 'Expect a ValueError'
 b = USResident('Tim Horton', 'non-resident')
-b.getStatus()
