@@ -9,6 +9,7 @@ def dict_invert(d):
         try:
             item_list = inverted_dict[d[item]]
             item_list.append(item)
+            item_list = sorted(item_list)
             inverted_dict[d[item]] = item_list
         except:
             inverted_dict[d[item]] = [item]
@@ -26,3 +27,7 @@ print 'Actual:', dict_invert({1:10, 2:20, 3:30, 4:30})
 # Test 3
 print 'Expected: {True: [0, 2, 4]}'
 print 'Actual:', dict_invert({4:True, 2:True, 0:True})
+
+# Test 4
+print 'Expected: {6: [2, 4, 6, 8]}'
+print 'Actual:', dict_invert({8: 6, 2: 6, 4: 6, 6: 6})
