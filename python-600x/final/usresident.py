@@ -31,22 +31,36 @@ class Person(object):
     def __str__(self):
         #return self's name
         return self.name
-        
+
 class USResident(Person):
-    """ 
+    """
     A Person who resides in the US.
     """
     def __init__(self, name, status):
-        """ 
-        Initializes a Person object. A USResident object inherits 
+        """
+        Initializes a Person object. A USResident object inherits
         from Person and has one additional attribute:
         status: a string, one of "citizen", "legal_resident", "illegal_resident"
         Raises a ValueError if status is not one of those 3 strings
         """
-        # Write your code here
-        
+        Person.__init__(self, name)
+        self.status = status
+
     def getStatus(self):
         """
         Returns the status
         """
-        # Write your code here
+        if self.status == 'citizen':
+            return self.status
+        else:
+            raise ValueError('not a citizen')
+
+# Test - person is an US resident
+print 'Expected: citizen'
+a = USResident('Tim Beaver', 'citizen')
+print 'Actual:', a.getStatus()
+
+# Test - person is not an US resident
+print 'Expect a ValueError'
+b = USResident('Tim Horton', 'non-resident')
+b.getStatus()
