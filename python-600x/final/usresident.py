@@ -44,16 +44,18 @@ class USResident(Person):
         Raises a ValueError if status is not one of those 3 strings
         """
         Person.__init__(self, name)
-        self.status = status
+        legal_vals = ["citizen", "legal_resident", "illegal_resident"]
+        
+        if status in legal_vals:
+            self.status = status
+        else:
+            raise ValueError
 
     def getStatus(self):
         """
         Returns the status
         """
-        if self.status == 'citizen':
-            return self.status
-        else:
-            raise ValueError('not a citizen')
+        return self.status
 
 # Test - person is an US resident
 print 'Expected: citizen'
