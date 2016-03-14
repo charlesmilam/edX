@@ -76,7 +76,7 @@ print
 # Test - Arrogant Professor say
 print 'Arrogant Professor say'
 print 'Expected: eric says: It is obvious that I believe that eric says: the sky is blue'
-print 'Actual:', pe.say('the sky is blue')
+print 'Actual:', ae.say('the sky is blue')
 print
 print '-' * 15
 print
@@ -84,7 +84,7 @@ print
 # Test - Arrogant Professor lecture
 print 'Arrogant Professor lecture'
 print 'Expected: It is obvious that I believe that eric says: the sky is blue'
-print 'Actual:', pe.say('the sky is blue')
+print 'Actual:', ae.say('the sky is blue')
 print
 print '-' * 15
 print
