@@ -1,1 +1,1 @@
-# Course file for Analytic Edge from MITx via EdX.
+# Course files for Analytic Edge from MITx via EdX.
