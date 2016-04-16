@@ -21,3 +21,26 @@ length(which(mvt$Arrest == TRUE))
 length(which(mvt$LocationDescription == "ALLEY"))
 
 # Problem 2 - Understanding Date in R
+
+# exaxmine first entry of Date
+mvt$Date[1]
+
+# convert Date to date object
+DateConvert = as.Date(strptime(mvt$Date, "%m/%d/%y %H:%M"))
+# examine summary of DateConvert
+summary(DateConvert)
+
+# add month and weekday to mvt data frame
+mvt$Month = months(DateConvert)
+mvt$Weekday = weekdays(DateConvert)
+# replace the default Date with DateConvert variable
+mvt$Date = DateConvert
+# display as table to determine month with fewest thefts
+table(c(mvt$Month, length(mvt$ID)))
+
+# distplay as table to determine weekday with most thefts
+table(c(mvt$Weekday, length(mvt$ID)))
+
+# display as table to determine month with most arrests
+table(mvt$Month, mvt$Arrest)
+
