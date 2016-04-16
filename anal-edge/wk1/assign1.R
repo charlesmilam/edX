@@ -44,3 +44,26 @@ table(c(mvt$Weekday, length(mvt$ID)))
 # display as table to determine month with most arrests
 table(mvt$Month, mvt$Arrest)
 
+# Problem 3 - Visualiizing Crime Trends
+
+# create histogram of Date
+hist(mvt$Date, breaks = 100)
+
+# create boxplot of Date sorted by Arrest
+boxplot(mvt$Date ~ mvt$Arrest)
+
+# create tables based on arrests
+# year 2001
+MVT2001 = mvt[mvt$Year == 2001,]
+ArrestsMade2001 = mvt[mvt$Year == 2001 & mvt$Arrest == TRUE,]
+table(ArrestsMade2001$Month)
+
+# year 2007
+MVT2007 = mvt[mvt$Year == 2007,]
+ArrestsMade2007 = mvt[mvt$Year == 2007 & mvt$Arrest == TRUE,]
+table(ArrestsMade2007$Month)
+
+# year 2012
+MVT2012 = mvt[mvt$Year == 2012,]
+ArrestsMade2012 = mvt[mvt$Year == 2012 & mvt$Arrest == TRUE,]
+table(ArrestsMade2012$Month)
