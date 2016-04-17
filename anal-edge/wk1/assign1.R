@@ -67,3 +67,25 @@ table(ArrestsMade2007$Month)
 MVT2012 = mvt[mvt$Year == 2012,]
 ArrestsMade2012 = mvt[mvt$Year == 2012 & mvt$Arrest == TRUE,]
 table(ArrestsMade2012$Month)
+
+# Problem 4 - Popular Locations
+
+# sorted locations table
+sort(table(mvt$LocationDescription))
+
+# create top 5 theft locations variable
+Top5 = mvt[mvt$LocationDescription == "STREET" | mvt$LocationDescription == "PARKING LOT/GARAGE(NON.RESID.)" | mvt$LocationDescription == "ALLEY" | mvt$LocationDescription == "GAS STATION" | mvt$LocationDescription == "DRIVEWAY - RESIDENTIAL",]
+# check structure to determine number of obs
+str(Top5)
+
+# factor Top5 location description
+Top5$LocationDescription = factor(Top5$LocationDescription)
+str(Top5)
+# determine location with highest arrest rate
+tapply(Top5$Arrest, Top5$LocationDescription, mean)
+
+# determine day of week with most thefts at gas stations
+table(Top5$Weekday[Top5$LocationDescription == "GAS STATION"])
+
+# determine day of the week with least thefts from residential driveways
+table(Top5$Weekday[Top5$LocationDescription == "DRIVEWAY - RESIDENTIAL"])
