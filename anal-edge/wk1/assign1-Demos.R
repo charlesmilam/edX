@@ -46,3 +46,26 @@ tapply(c(is.na(CPS$MetroAreaCode)), CPS$State,  mean)
 str(MetroCodes)
 str(CountryCodes)
 
+# intergrate metro area data into CPS
+CPS = merge(CPS, MetroCodes, by.x="MetroAreaCode", by.y="Code", all.x=TRUE)
+summary(CPS)
+str(CPS)
+
+# determine the number of interviewees with missing MetroArea data
+table(CPS$MetroArea, useNA = "ifany")
+
+# determine which metro area has the largest num of interviewees
+# from a particular set of 4 areas
+ABBS = CPS[CPS$MetroArea == "Atlanta-Sandy Springs-Marietta, GA" | CPS$MetroArea == "Baltimore-Towson, MD" | CPS$MetroArea == "Boston-Cambridge-Quincy, MA-NH" | CPS$MetroArea == "San Francisco-Oakland-Fremont, CA",]
+ABBS$MetroArea = factor(ABBS$MetroArea)
+table(ABBS$MetroArea)
+
+# determine metro area with highest proportion of Hispanic ethnicity
+sort(tapply(CPS$Hispanic, CPS$MetroArea, mean))
+
+# determine number of metro areas with race Asian > 20%
+sort(tapply(CPS$Race == "Asian", CPS$MetroArea, mean))
+
+# determine metro area with smallest proportion with no high school degree
+sort(tapply(CPS$Education == "No high school diploma", CPS$MetroArea, mean, na.rm = TRUE))
+
