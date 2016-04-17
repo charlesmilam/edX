@@ -1,7 +1,6 @@
 # Assignment 1 Stocks Data
 
-# Problem 1 - Summary Statistics
-
+# set up data
 # create data frames from provided data files
 IBM = read.csv("IBMStock.csv")
 GE = read.csv("GEStock.csv")
@@ -15,6 +14,8 @@ GE$Date = as.Date(GE$Date, "%m/%d/%y")
 CocaCola$Date = as.Date(CocaCola$Date, "%m/%d/%y")
 ProcterGamble$Date = as.Date(ProcterGamble$Date, "%m/%d/%y")
 Boeing$Date = as.Date(Boeing$Date, "%m/%d/%y")
+
+# Problem 1 - Summary Statistics
 
 # view structure of data frames to determine the number of obs
 str(IBM)
