@@ -45,3 +45,18 @@ lines(ProcterGamble$Date, ProcterGamble$StockPrice, col = "blue")
 
 # add abline to make question answering easier
 abline(v = as.Date(c("1983-01-01")), lwd = 2)
+
+# Problem 3 - Visualizing Stock Dynamics 1995-2005
+
+# create line plot for Coca-Cola for given time period
+plot(CocaCola$Date[301:432], CocaCola$StockPrice[301:432], type="l", col="red", ylim=c(0,210))
+
+# add lines for the rest of the stocks
+lines(ProcterGamble$Date[301:432], ProcterGamble$StockPrice[301:432], type="l", col="purple", ylim=c(0,210))
+lines(IBM$Date[301:432], IBM$StockPrice[301:432], type="l", col="blue", ylim=c(0,210))
+lines(GE$Date[301:432], GE$StockPrice[301:432], type="l", col="lightblue", ylim=c(0,210))
+lines(Boeing$Date[301:432], Boeing$StockPrice[301:432], type="l", col="green", ylim=c(0,210))
+
+# add ablines to aid in isolating a subset of dates
+abline(v = as.Date(c("1997-09-01")), lwd = 2)
+abline(v = as.Date(c("1997-11-30")), lwd = 2)
