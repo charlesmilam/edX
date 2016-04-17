@@ -35,3 +35,13 @@ summary(Boeing)
 # determine standard deviaion of Procter & Gamble
 sd(ProcterGamble$StockPrice)
 
+# Problem 2 - Visualizing Stock Dynamics
+
+# line plot for Coca-Cola stock price ove time
+plot(CocaCola$Date, CocaCola$StockPrice, xlab = "Date", ylab = "Stock Price", main = "Stock Prices Over Time", type = "l", col = "red")
+
+# add lines for Procter & Gamble
+lines(ProcterGamble$Date, ProcterGamble$StockPrice, col = "blue")
+
+# add abline to make question answering easier
+abline(v = as.Date(c("1983-01-01")), lwd = 2)
