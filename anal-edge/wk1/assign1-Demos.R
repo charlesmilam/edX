@@ -69,3 +69,22 @@ sort(tapply(CPS$Race == "Asian", CPS$MetroArea, mean))
 # determine metro area with smallest proportion with no high school degree
 sort(tapply(CPS$Education == "No high school diploma", CPS$MetroArea, mean, na.rm = TRUE))
 
+# Problem 4 - Integrating Country of Birth Data
+
+# intergrate country data into CPS
+CPS = merge(CPS, CountryCodes, by.x="CountryOfBirthCode", by.y="Code", all.x=TRUE)
+summary(CPS)
+str(CPS)
+
+# determine the most common country of birth outside of North America
+sort(table(CPS$Country))
+
+# determine proportion in NY-NJ-PA area with birth country not US
+tapply(CPS$Country != "United States", CPS$MetroArea == "New York-Northern New Jersey-Long Island, NY-NJ-PA", mean, na.rm = TRUE)
+
+# determine metro area with largest num of birth country India
+sort(tapply(CPS$Country == "India", CPS$MetroArea, sum, na.rm = TRUE))
+# determine metro area with largest num of birth country Brazil
+sort(tapply(CPS$Country == "Brazil", CPS$MetroArea, sum, na.rm = TRUE))
+# determine metro area with largest num of birth country Somalia
+sort(tapply(CPS$Country == "Somalia", CPS$MetroArea, sum, na.rm = TRUE))
