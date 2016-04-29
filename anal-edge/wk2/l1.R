@@ -41,3 +41,9 @@ summary(model3)
 # and recompute SSE one more time and view it
 SSE = sum(model3$residuals^2)
 SSE
+
+# create model for use in quick questions
+price_rain_model = lm(Price ~ HarvestRain + WinterRain, data = wine)
+
+# view summary of price rain model
+summary(price_rain_model)
