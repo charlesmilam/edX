@@ -47,3 +47,9 @@ price_rain_model = lm(Price ~ HarvestRain + WinterRain, data = wine)
 
 # view summary of price rain model
 summary(price_rain_model)
+
+# create model not making use of FrancePop
+model4 = lm(Price ~ WinterRain + AGST + HarvestRain + Age, data = wine)
+
+# view summary of model4
+summary(model4)
