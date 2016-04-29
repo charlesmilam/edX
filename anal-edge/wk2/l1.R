@@ -31,3 +31,13 @@ summary(model2)
 # recompute the SSE and view it
 SSE = sum(model2$residuals^2)
 SSE
+
+# create new model using all available ind variables
+model3 = lm(Price ~ WinterRain + AGST + HarvestRain + Age + FrancePop, data = wine)
+
+# view sumary of model3
+summary(model3)
+
+# and recompute SSE one more time and view it
+SSE = sum(model3$residuals^2)
+SSE
