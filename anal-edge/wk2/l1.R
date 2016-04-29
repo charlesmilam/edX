@@ -53,3 +53,25 @@ model4 = lm(Price ~ WinterRain + AGST + HarvestRain + Age, data = wine)
 
 # view summary of model4
 summary(model4)
+
+# view summary of price_rain_model again for use in quick question
+summary(price_rain_model)
+
+# view correlation between winter rain and price
+cor(wine$WinterRain, wine$Price)
+
+# view correlation between age and france pop
+cor(wine$Age, wine$FrancePop)
+
+# view all correlations
+cor(wine)
+
+# create new model not making use of age and france pop
+model5 = lm(Price ~ AGST + WinterRain + HarvestRain, data = wine)
+
+# view summary of model5
+summary(model5)
+
+# determine correlation between winter rain and harvest rain for use with 
+# quick question
+cor(wine$WinterRain, wine$HarvestRain)
