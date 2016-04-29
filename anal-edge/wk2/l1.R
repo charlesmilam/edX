@@ -27,3 +27,7 @@ model2 = lm(Price ~ AGST + HarvestRain, data = wine)
 
 # view summary of model2
 summary(model2)
+
+# recompute the SSE and view it
+SSE = sum(model2$residuals^2)
+SSE
