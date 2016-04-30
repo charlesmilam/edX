@@ -47,3 +47,18 @@ qq_rs = -804.63 + (2737.77 * 0.311) + (1584.91 * 0.405)
 qq_ra = -837.38 + (2913.60 * 0.297) + (1514.29 * 0.370)
 qq_rs
 qq_ra
+
+# create team rank vector for qq
+team_rank = c(1, 2, 3, 3, 4, 4, 4, 4, 5, 5)
+
+# create vector for team wins in 2012 playoffs
+wins_2012 = c(94, 88, 95, 88, 93, 94, 98, 97, 93, 94)
+
+# do the same for teh 2013 playoffs teams
+wins_2013 = c(97, 97, 92, 93, 92, 96, 94, 96, 92, 90)
+
+# deterimine correllation between team wins and rank for 2012
+cor(team_rank, wins_2012)
+
+# and for 2013
+cor(team_rank, wins_2013)
