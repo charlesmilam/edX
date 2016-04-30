@@ -75,3 +75,25 @@ summary(model5)
 # determine correlation between winter rain and harvest rain for use with 
 # quick question
 cor(wine$WinterRain, wine$HarvestRain)
+
+# load wine test data
+wine_test = read.csv("wine_test.csv")
+
+# view structure and summary of wine_test
+str(wine_test)
+summary(wine_test)
+
+# create prediction variable
+predict_test = predict(model4, newdata = wine_test)
+
+# view prediction
+predict_test
+
+# determine SSE
+SSE = sum((wine_test$Price - predict_test)^2)
+
+# determine SST
+SST = sum((wine_test$Price - mean(wine$Price))^2)
+
+# determine the r squared
+1 - (SSE / SST)
