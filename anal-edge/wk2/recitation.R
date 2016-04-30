@@ -55,3 +55,21 @@ SSE4
 # calculate the RMSE based on latest model's SSE and view it
 RMSE4 = sqrt(SSE4 / nrow(nba))
 RMSE4
+
+# load test data
+nba_test = read.csv("NBA_test.csv")
+
+# create predication variable for test data
+pts_predict = predict(pts_reg4, newdata = nba_test)
+
+# calculate new SSE
+SSE = sum((pts_predict - nba_test$PTS)^2)
+# calculate SST
+SST = sum((mean(nba$PTS) - nba_test$PTS)^2)
+# calculate r squared for test data, and view it
+r2 = 1 - SSE / SST
+r2
+
+# calculate the RMSE for test data
+RMSE = sqrt(SSE / nrow(nba_test))
+RMSE
