@@ -26,3 +26,18 @@ wins_reg = lm(W ~ RD, data = moneyball)
 
 # view summary of wins_reg
 summary(wins_reg)
+
+# view structure of moneyball
+str(moneyball)
+
+# create model for runs, and view its summary
+runs_reg = lm(RS ~ OBP + SLG + BA, data = moneyball)
+summary(runs_reg)
+
+# revise model, removing the batting average, and view model summary
+runs_reg = lm(RS ~ OBP + SLG, data = moneyball)
+summary(runs_reg)
+
+# create model for runs allowed, and view its summary
+runs_allow_reg = lm(RA ~ OOBP + OSLG, data = moneyball)
+summary(runs_allow_reg)
