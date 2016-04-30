@@ -41,3 +41,9 @@ summary(runs_reg)
 # create model for runs allowed, and view its summary
 runs_allow_reg = lm(RA ~ OOBP + OSLG, data = moneyball)
 summary(runs_allow_reg)
+
+# determine runs scored and runs allowed for qq based on provided values
+qq_rs = -804.63 + (2737.77 * 0.311) + (1584.91 * 0.405)
+qq_ra = -837.38 + (2913.60 * 0.297) + (1514.29 * 0.370)
+qq_rs
+qq_ra
