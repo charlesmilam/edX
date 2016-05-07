@@ -36,3 +36,11 @@ summary(predict_train)
 
 # compare prediction against actual
 tapply(predict_train, quality_train$PoorCare, mean)
+
+# create model for poor care based on combo and provider count
+combi_prov_log = glm(PoorCare ~ StartedOnCombination + ProviderCount, data = quality_train, family = binomial)
+summary(combi_prov_log)
+
+# create prediction for combi_prov_log
+predict_combi = predict(combi_prov_log, type = "response")
+summary(predict_combi)
