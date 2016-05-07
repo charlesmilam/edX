@@ -44,3 +44,23 @@ summary(combi_prov_log)
 # create prediction for combi_prov_log
 predict_combi = predict(combi_prov_log, type = "response")
 summary(predict_combi)
+
+# create some classification tables
+# 0.5 threshold
+table(quality_train$PoorCare, predict_train > 0.5)
+# compute sensitivity
+10 / 25
+# compute specificity
+70 / 74
+# 0.7 threshold
+table(quality_train$PoorCare, predict_train > 0.7)
+# compute sensitivity
+8 / 25
+# compute specificity
+73 / 74
+# 0.7 threshold
+table(quality_train$PoorCare, predict_train > 0.2)
+# compute sensitivity
+16 / 25
+# compute specificity
+54 / 74
