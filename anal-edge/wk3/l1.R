@@ -64,3 +64,17 @@ table(quality_train$PoorCare, predict_train > 0.2)
 16 / 25
 # compute specificity
 54 / 74
+
+# generate ROC curves
+# add library ROCR
+library(ROCR)
+# add a prediction
+rocr_pred = prediction(predict_train, quality_train$PoorCare)
+# add a performance
+rocr_perf = performance(rocr_pred, "tpr", "fpr")
+#plot the perf
+plot(rocr_perf)
+# now with colors
+plot(rocr_perf, colorize = TRUE)
+# and with threshold labels
+plot(rocr_perf, colorize = TRUE, print.cutoffs.at = seq(0, 1, 0.1), text.adj = c(-0.2, 1.7))
