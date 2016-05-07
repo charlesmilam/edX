@@ -78,3 +78,11 @@ plot(rocr_perf)
 plot(rocr_perf, colorize = TRUE)
 # and with threshold labels
 plot(rocr_perf, colorize = TRUE, print.cutoffs.at = seq(0, 1, 0.1), text.adj = c(-0.2, 1.7))
+
+# check accuracy of original model (quality_log)
+# make prediction based on test data
+predict_test = predict(quality_log, type = "response", newdata = quality_test)
+# compute the AUC of the test set
+roc_pred_test = prediction(predict_test, quality_test$PoorCare)
+auc = as.numeric(performance(roc_pred_test, "auc")@y.values)
+auc
