@@ -26,3 +26,18 @@ polling_imputed = read.csv("PollingData_Imputed.csv")
 # add in the imputed variables to the base polling data frame.
 polling$Rasmussen = polling_imputed$Rasmussen
 polling$SurveyUSA = polling_imputed$SurveyUSA
+
+# create training and testing data sets
+train = subset(polling, Year == 2004 | Year == 2008)
+test = subset(polling, Year == 2012)
+
+# view dependent variable Republican from the training set
+table(train$Republican)
+
+# create a smart baseline using data from the Rasmussen variable
+poll_baseline = sign(train$Rasmussen)
+
+# view this baseline as a table
+table(poll_baseline)
+# and compare it to the actual
+table(train$Republican, poll_baseline)
