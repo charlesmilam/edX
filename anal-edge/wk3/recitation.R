@@ -60,3 +60,14 @@ summary(mod2)
 # create a prediction
 pred2 = predict(mod2, type = "response")
 table(train$Republican, pred2 >= 0.5)
+
+# use second model against testing data
+# first view testing data against the test baseline
+poll_test_baseline = sign(test$Rasmussen)
+table(test$Republican, poll_test_baseline)
+# make prediction on test data using the model
+test_pred = predict(mod2, newdata = test, type = "response")
+table(test$Republican, test_pred >= 0.5)
+# find the mistake that the prediction made
+subset(test, test_pred >= 0.5 & Republican == 0)
+
