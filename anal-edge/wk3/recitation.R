@@ -41,3 +41,22 @@ poll_baseline = sign(train$Rasmussen)
 table(poll_baseline)
 # and compare it to the actual
 table(train$Republican, poll_baseline)
+
+# determine the corellation between the independent variables and the dependent variable
+cor(train[c("Rasmussen", "SurveyUSA", "PropR", "DiffCount", "Republican")])
+
+# create a model based on the highly correlated PropR
+mod1 = glm(Republican ~ PropR, data = train, family = binomial)
+summary(mod1)
+# analyze the model
+# create a prediction
+pred1 = predict(mod1, type = "response")
+table(train$Republican, pred1 >= 0.5)
+
+# create a new model based on two variables
+mod2 = glm(Republican ~ SurveyUSA + DiffCount, data = train, family = binomial)
+summary(mod2)
+# analyze the model
+# create a prediction
+pred2 = predict(mod2, type = "response")
+table(train$Republican, pred2 >= 0.5)
